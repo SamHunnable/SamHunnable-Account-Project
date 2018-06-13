@@ -39,15 +39,18 @@ public class AccountService {
  
 	public boolean checkBlockedAccount() {
 		boolean blockedAccountFound = false;
+		
 		for (Entry<Integer, Account> e : accountMap.entrySet()) {
+			
 			Account curAccount = e.getValue();
-			if(curAccount.getAccountNumber() == "9999") {
-				
+			
+			if(curAccount.getAccountNumber() == "9999") {	
 				blockedAccountFound = true;
 				System.out.println("Blocked account found");
 			}
+			
 		}	
-			return blockedAccountFound;
+		return blockedAccountFound;
 	}
 
 }
