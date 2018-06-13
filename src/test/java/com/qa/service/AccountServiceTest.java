@@ -63,7 +63,7 @@ public class AccountServiceTest {
 	@Test
 	public void findBlockedAccountTest() {
 		service.addAccountFromMap(badAccount);
-		Assert.assertEquals(true, AccountService.checkBlockedAccount);
+		Assert.assertEquals(true, service.checkBlockedAccount());
 	}
 
 }
