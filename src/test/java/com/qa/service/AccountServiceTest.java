@@ -42,7 +42,7 @@ public class AccountServiceTest {
 	public void accountConversionToJSONTest() {
 		String emptyMap = util.getJSONForObject(service.getAccountMap());
 		Assert.assertEquals("{}", emptyMap);
-		String accountAsJSON = "{\"0\":{\"firstName\":\"Joe\",\"secondName\":\"Bloggs\",\"accountNumber\":\"1234\"},\"1\":{\"firstName\":\"Jane\",\"secondName\":\"Bloggs\",\"accountNumber\":\"1234\"}}";
+		String accountAsJSON = "{\"0\":{\"ID\":0,\"firstName\":\"Joe\",\"secondName\":\"Bloggs\",\"accountNumber\":\"1234\"},\"1\":{\"ID\":0,\"firstName\":\"Jane\",\"secondName\":\"Bloggs\",\"accountNumber\":\"1234\"}}";
 		Assert.assertEquals("{}", emptyMap);
 		service.addAccountFromMap(joeBloggs);
 		service.addAccountFromMap(janeBloggs);
