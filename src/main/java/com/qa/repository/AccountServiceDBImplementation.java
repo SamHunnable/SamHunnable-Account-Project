@@ -3,6 +3,8 @@ package com.qa.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -11,8 +13,10 @@ import javax.transaction.Transactional;
 import com.google.gson.Gson;
 import com.qa.domain.Account;
 
+@Default
+@ApplicationScoped
 @Transactional(SUPPORTS)
-public class AccountServiceDBImplementation {
+public class AccountServiceDBImplementation implements AccountServiceImplementation {
 
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
@@ -44,8 +48,8 @@ public class AccountServiceDBImplementation {
 		
 	}
 		
-	public String deleteAccount(String accountNumber) {
-		manager.remove(accountNumber);
+	public String deleteAccount(long ID) {
+		manager.remove(ID);
 		return "{\"message\": \"Account sucessfully deleted\"}";
 	}
 	
