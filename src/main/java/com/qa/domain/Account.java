@@ -10,12 +10,12 @@ public class Account {
 	@GeneratedValue
 	private long ID;
 	private String firstName;
-	private String secondName;
+	private String lastName;
 	private String accountNumber;
 
 	public Account(String firstName, String secondName, String accountNumber) {
 		this.firstName = firstName;
-		this.secondName = secondName;
+		this.lastName = secondName;
 		this.accountNumber = accountNumber;
 	}
 
@@ -27,12 +27,12 @@ public class Account {
 		this.firstName = firstName;
 	}
 
-	public String getSecondName() {
-		return secondName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
+	public void setLastName(String secondName) {
+		this.lastName = secondName;
 	}
 
 	public String getAccountNumber() {
