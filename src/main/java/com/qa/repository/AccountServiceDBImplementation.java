@@ -1,12 +1,12 @@
 package com.qa.repository;
 
+import static javax.transaction.Transactional.TxType.REQUIRED;
+import static javax.transaction.Transactional.TxType.SUPPORTS;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import static javax.transaction.Transactional.TxType.*;
-
-import java.util.List;
 
 import com.google.gson.Gson;
 import com.qa.domain.Account;
@@ -24,13 +24,24 @@ public class AccountServiceDBImplementation {
 		return "{\"message\": \"Account sucessfully added\"}";
 	}
 	
-	public List<Account> findAllAccounts() {
+	public String findAllAccounts() {
 		TypedQuery<Account> query = manager.createQuery("SELECT * FROM Account", Account.class);
-		return query.getResultList();
+		if (query.getResultList() == null) {
+			return "{\"message\": \"No accounts found\"}";
+		}
+		else {
+			return new Gson().toJson(query.getResultList());
+		}	
 	}
 	
-	public Account findAnAccount(long ID) {	
-		return manager.find(Account.class, ID);
+	public String findAnAccount(long ID) {	
+		if (manager.find(Account.class, ID) == null) {
+			return "{\"message\": \"No account found\"}";
+		}
+		else {
+			return new Gson().toJson(manager.find(Account.class, ID));
+		}
+		
 	}
 		
 	public String deleteAccount(String accountNumber) {
@@ -39,13 +50,13 @@ public class AccountServiceDBImplementation {
 	}
 	
 	public String updateAccountFirstName(String newFirstName, long ID) {
-		Account account = findAnAccount(ID);
+		Account account = manager.find(Account.class, ID);
 		account.setFirstName(newFirstName);		
 		return "{\"message\": \"Account sucessfully edited\"}";
 	}
 	
 	public String updateAccountLastName(String newLastName, long ID) {
-		Account account = findAnAccount(ID);
+		Account account = manager.find(Account.class, ID);
 		account.setLastName(newLastName);		
 		return "{\"message\": \"Account sucessfully edited\"}";
 	}
